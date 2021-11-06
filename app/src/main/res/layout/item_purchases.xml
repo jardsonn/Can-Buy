@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/item_list_padding"
+    android:paddingVertical="@dimen/item_list_padding">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/purchases_item_list_product_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/shopping_bag"/>
+
+    <TextView
+        android:id="@+id/purchases_item_list_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/purchases_item_list_product_cart"
+        android:layout_toEndOf="@id/purchases_item_list_product_image"
+        tools:text="Arroz" />
+
+    <TextView
+        android:id="@+id/purchases_item_list_product_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/purchases_item_list_product_name"
+        android:layout_toStartOf="@id/purchases_item_list_product_cart"
+        android:layout_toEndOf="@id/purchases_item_list_product_image"
+        tools:text="50" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/purchases_item_list_product_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>

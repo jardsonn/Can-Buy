@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CanBuy" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/primary_light</item>
+        <item name="colorSecondaryVariant">@color/primary</item>
+        <item name="colorOnSecondary">@color/secondary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/secondary</item>
+        <!-- ActionMode -->
+        <item name="actionModeBackground">@color/primary</item>
+        <!-- Window -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- Font -->
+<!--        <item name="fontFamily">@font/nunito</item>-->
+
+   </style>
+
+</resources>
