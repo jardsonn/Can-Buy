@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Can Buy</string>
+    <string name="description_btn_remove">Remover um produto da lista</string>
+    <string name="quantity_label">Qtd: %d</string>
+    <string name="value_label">Valor: %s</string>
+    <string name="total">Total (%d)</string>
+    <string name="total_cart">Carrinho (%d)</string>
 </resources>

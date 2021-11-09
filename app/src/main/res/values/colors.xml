@@ -9,8 +9,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary">#FFC400</color>
+    <color name="primary_dark">#DAA700</color>
     <color name="primary_light">#FBD864</color>
     <color name="secondary">#222222</color>
     <color name="secondary_light">#353535</color>
+
+    <color name="text_color">#141414</color>
+    <color name="text_color_light">#757575</color>
+    <color name="bottom_sheet_color">#363636</color>
 
 </resources>

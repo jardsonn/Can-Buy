@@ -1,8 +1,10 @@
 package com.jcs.canbuy.data.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.jcs.canbuy.data.database.entities.ProductEntity
 import kotlinx.coroutines.flow.Flow
+import java.math.BigDecimal
 
 //import kotlinx.coroutines.flow.Flow
 
@@ -23,12 +25,17 @@ interface ProductDao {
     suspend fun update(productEntity: ProductEntity)
 
     @Query("SELECT * FROM product_table WHERE id = :id")
-     fun getProductById(id:Int): Flow<ProductEntity>
+    fun getProductById(id: Int): Flow<ProductEntity>
 
     @Query("SELECT * FROM product_table")
-     fun getAllProducts(): Flow<List<ProductEntity>>
+    fun getAllProducts(): Flow<List<ProductEntity>>
 
     @Query("DELETE FROM product_table")
     suspend fun deleteAll()
 
+    @Query("SELECT COUNT(*) FROM product_table")
+     fun getQuantity(): Flow<Int>
+
+     @Query("SELECT * FROM product_table WHERE is_in_cart = 1")
+     fun getProductInCart(): Flow<List<ProductEntity>>
 }

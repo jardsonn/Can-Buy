@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.jcs.canbuy.databinding.ActivityMainBinding
-import com.jcs.canbuy.databinding.CustomTitleBinding
 import com.jcs.canbuy.ui.fragments.FragmentMain
 
 class MainActivity : AppCompatActivity() {
@@ -16,13 +15,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarMain)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayShowCustomEnabled(true)
-       // val customTitleLayout = layoutInflater.inflate(R.layout.custom_title, null)
-        val customTitleLayout = CustomTitleBinding.inflate(layoutInflater)
-        val customTitle = customTitleLayout.customTitleText
-        customTitle.text = getText(R.string.app_name)
-        supportActionBar?.customView = customTitleLayout.root
 
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()

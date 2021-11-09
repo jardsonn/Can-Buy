@@ -1,9 +1,7 @@
 package com.jcs.canbuy.repository
 
 import com.jcs.canbuy.data.database.dao.ProductDao
-import com.jcs.canbuy.data.database.entities.*
-import com.jcs.canbuy.data.models.Product
-import kotlinx.coroutines.coroutineScope
+import com.jcs.canbuy.data.database.entities.ProductEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
@@ -13,15 +11,15 @@ import kotlinx.coroutines.flow.collect
 
 class ProductRepository(private val dao: ProductDao) {
 
+    val allProducts: Flow<List<ProductEntity>> = dao.getAllProducts()
 
-     suspend fun getAllProducts(): Flow<List<Product>>{
-        return toProductList(dao.getAllProducts())
-    }
+    val productQuantity: Flow<Int> = dao.getQuantity()
 
+    val productInCart: Flow<List<ProductEntity>> = dao.getProductInCart()
 
-    suspend fun insertProduct(product: Product): Boolean {
+    suspend fun insertProduct(product: ProductEntity): Boolean {
         return try {
-            dao.insert(toEntity(product))
+            dao.insert(product)
             true
         } catch (e: Exception) {
             false
@@ -40,33 +38,33 @@ class ProductRepository(private val dao: ProductDao) {
     }
 
     suspend fun deleteAllProducts(): Boolean {
-        var hasDeleted: Boolean = false
+        var hasDeleted = false
         dao.getAllProducts().collect {
             hasDeleted = if (it.isNotEmpty()) try {
-                 dao.deleteAll()
+                dao.deleteAll()
                 true
             } catch (e: Exception) {
                 false
             } else false
         }
-       return hasDeleted
+        return hasDeleted
     }
 
     suspend fun updateProduct(
         productId: Int,
         productName: String,
         productPrice: Double,
-        productQuantity: Int
+        productQuantity: Int,
+        isInCart: Boolean
     ): Boolean {
         return try {
             dao.update(
-                toEntity(
-                    Product(
-                        productId,
-                        productName,
-                        productPrice,
-                        productQuantity
-                    )
+                ProductEntity(
+                    productId,
+                    productName,
+                    productPrice,
+                    productQuantity,
+                    isInCart
                 )
             )
             true
