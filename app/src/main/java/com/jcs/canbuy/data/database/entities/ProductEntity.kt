@@ -16,7 +16,8 @@ data class ProductEntity(
     val id: Int?,
     val name: String,
     val price: Double,
-    val quantity: Int,
+    val quantity: Double,
+    val unit: String,
     @ColumnInfo(name = "is_in_cart")
     val isInCart: Boolean
 )

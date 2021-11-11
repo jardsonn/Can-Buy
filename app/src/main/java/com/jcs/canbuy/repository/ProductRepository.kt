@@ -17,6 +17,17 @@ class ProductRepository(private val dao: ProductDao) {
 
     val productInCart: Flow<List<ProductEntity>> = dao.getProductInCart()
 
+    fun getProductById(productId: Int): Flow<ProductEntity> = dao.getProductById(productId)
+
+    suspend fun insertProductInCart(productId: Int, isInCart: Boolean): Boolean{
+        return try {
+            dao.updeteCart(productId, isInCart)
+            true
+        }catch (e: java.lang.Exception){
+            false
+        }
+    }
+
     suspend fun insertProduct(product: ProductEntity): Boolean {
         return try {
             dao.insert(product)
@@ -50,11 +61,21 @@ class ProductRepository(private val dao: ProductDao) {
         return hasDeleted
     }
 
+    suspend fun updateProduct(product: ProductEntity):Boolean{
+       return try {
+           dao.update(product)
+           true
+       }catch (e: Exception){
+           false
+       }
+    }
+
     suspend fun updateProduct(
         productId: Int,
         productName: String,
         productPrice: Double,
-        productQuantity: Int,
+        productQuantity: Double,
+        unit: String,
         isInCart: Boolean
     ): Boolean {
         return try {
@@ -64,6 +85,7 @@ class ProductRepository(private val dao: ProductDao) {
                     productName,
                     productPrice,
                     productQuantity,
+                    unit,
                     isInCart
                 )
             )

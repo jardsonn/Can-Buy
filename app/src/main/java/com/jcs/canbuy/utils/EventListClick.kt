@@ -13,6 +13,6 @@ class EventListClick {
     }
 
     interface OnItemCartListener{
-        fun onItemCart(isChecked: Boolean, product: ProductEntity)
+        fun onItemCart(isChecked: Boolean, productId: Int?)
     }
 }

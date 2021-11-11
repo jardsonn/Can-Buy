@@ -40,6 +40,7 @@
         android:layout_marginBottom="15dp"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:maxLength="11"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calculator_img"
         tools:text="R$ 55,8" />
@@ -48,11 +49,11 @@
         android:id="@+id/shopping_cart_img"
         android:layout_width="@dimen/bottom_sheet_image_w"
         android:layout_height="@dimen/bottom_sheet_image_h"
-        android:layout_marginEnd="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_bottom_sheet_total_cart"
-        app:layout_constraintHorizontal_bias="1.0"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/tv_bottom_sheet_total"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/shopping_cart" />
@@ -61,12 +62,14 @@
         android:id="@+id/tv_bottom_sheet_total_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
         android:textColor="@color/white"
         android:textSize="@dimen/text_bottom_sheet_total_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/shopping_cart_img"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Carrinho (5)" />
 
@@ -78,9 +81,10 @@
         android:layout_marginBottom="15dp"
         android:textColor="@color/white"
         android:textSize="@dimen/text_bottom_sheet_total_value_size"
+        android:maxLength="11"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_bottom_sheet_total_cart"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/shopping_cart_img"
-        tools:text="R$ 55,8" />
+        tools:text="R$ 55,8458778" />
 </androidx.constraintlayout.widget.ConstraintLayout>

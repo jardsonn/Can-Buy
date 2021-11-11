@@ -22,8 +22,19 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <!-- Font -->
-<!--        <item name="fontFamily">@font/nunito</item>-->
+        <item name="fontFamily">@font/nunito</item>
 
    </style>
 
+    <style name="Theme.CanBuy.ButtonDialogStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.CanBuy.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_bg</item>
+        <item name="android:statusBarColor">@color/ic_launcher_background</item>
+    </style>
 </resources>

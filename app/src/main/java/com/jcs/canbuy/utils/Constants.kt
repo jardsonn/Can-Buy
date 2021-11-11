@@ -7,5 +7,6 @@ package com.jcs.canbuy.utils
 class Constants {
     companion object{
         const val DATABASE_NAME = "canbuy_db"
+        const val NOT_AN_UPDATE = -1
     }
 }

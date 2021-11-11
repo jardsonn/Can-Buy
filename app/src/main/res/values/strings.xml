@@ -1,8 +1,44 @@
 <resources>
     <string name="app_name">Can Buy</string>
     <string name="description_btn_remove">Remover um produto da lista</string>
-    <string name="quantity_label">Qtd: %d</string>
+    <string name="quantity_label">Qtd: %s</string>
     <string name="value_label">Valor: %s</string>
-    <string name="total">Total (%d)</string>
-    <string name="total_cart">Carrinho (%d)</string>
+    <string name="total">Total (%s)</string>
+    <string name="total_value">%s %s = %s</string>
+    <string name="total_cart">Carrinho (%s)</string>
+    <string name="new_item">Novo item</string>
+    <string name="name">Nome</string>
+    <string name="edit_name_hint">Nome</string>
+    <string name="edit_quantity_hint">Quantidade</string>
+    <string name="edit_unit_hint">Unidade</string>
+    <string name="insert_into_cart">Inserir no carrinho</string>
+    <string name="edit_price_hint">Preço</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="product_name_requerid">O nome do item é obrigatório</string>
+    <string name="add_new_product">Adicionar novo item</string>
+    <string name="update_product">Atualizar o item</string>
+
+    <string-array name="unit_of_measurement">
+        <item>kg</item>
+        <item>m</item>
+        <item>g</item>
+        <item>ml</item>
+        <item>L</item>
+        <item>un</item>
+        <item>Dúzia</item>
+        <item>Caixa</item>
+        <item>Fardo</item>
+        <item>Conjunto</item>
+        <item>Peça</item>
+        <item>Lata</item>
+        <item>Embalagem</item>
+        <item>Pacote</item>
+        <item>Milheiro</item>
+        <item>Par</item>
+        <item>Rolo</item>
+        <item>Folha</item>
+        <item>Galão</item>
+        <item>Resma</item>
+    </string-array>
 </resources>

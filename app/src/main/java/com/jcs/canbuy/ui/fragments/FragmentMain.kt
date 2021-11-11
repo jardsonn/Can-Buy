@@ -12,6 +12,7 @@ import com.jcs.canbuy.R
 import com.jcs.canbuy.data.database.entities.ProductEntity
 import com.jcs.canbuy.databinding.FragmentMainBinding
 import com.jcs.canbuy.ui.adapter.MainAdapter
+import com.jcs.canbuy.ui.dialog.InsertUpdateDialog
 import com.jcs.canbuy.ui.viewmodes.MainViewModel
 import com.jcs.canbuy.utils.CurrencyFormat
 
@@ -46,38 +47,41 @@ class FragmentMain : Fragment() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-
+        var a: MutableList<ProductEntity>
         viewModel.allProducts().observe(viewLifecycleOwner, {
             adapter.submitList(it)
-            tvBottomSheetTotal.text = getString(R.string.total, it.size)
+            a = adapter.currentList
+            tvBottomSheetTotal.text = getString(R.string.total, it.size.toString())
             tvBottomSheetValueTotal.text = CurrencyFormat.getValueFormated(viewModel.totalValue(it))
         })
 
         viewModel.productInCart().observe(viewLifecycleOwner, {
-            tvBottomSheetTotalCart.text = getString(R.string.total_cart, it.size)
+            tvBottomSheetTotalCart.text = getString(R.string.total_cart, it.size.toString())
             tvBottomSheetValueTotalCart.text =
                 CurrencyFormat.getValueFormated(viewModel.totalValue(it))
         })
 
-
-        fab.setOnClickListener {
-            viewModel.addProduct(ProductEntity(null, "Arroz", 8.9, 4, false))
+        fab.setOnClickListener { _ ->
+          InsertUpdateDialog.getInstance(null).apply {
+              setOnClickListener { viewModel.addProduct(it) }
+              show(this@FragmentMain.parentFragmentManager, "dialog_insert")
+          }
         }
 
-        adapter.setOnClickListener { product ->
-            product.id?.let { id -> viewModel.deleteProduct(id) }
+        adapter.setOnDeleteClickListener { product ->
+            viewModel.deleteProduct(product.id)
         }
 
-        adapter.setOnCartListener { isChecked, product ->
-            viewModel.updateProduct(
-                productId = product.id!!,
-                productName = product.name,
-                productPrice = product.price,
-                productQuantity = product.quantity,
-                isChecked
-            )
+        adapter.setOnCartListener { isChecked, productId ->
+            viewModel.addProductInCart(productId, isChecked)
         }
 
+        adapter.setOnItemClickListener { product ->
+            InsertUpdateDialog.getInstance(product).apply {
+               setOnClickListener { viewModel.updateProduct(it) }
+                show(this@FragmentMain.parentFragmentManager, "dialog_update")
+            }
+        }
         return root
     }
 

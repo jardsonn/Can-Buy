@@ -6,4 +6,5 @@
     <dimen name="bottom_sheet_height">70dp</dimen>
     <dimen name="bottom_sheet_image_w">40dp</dimen>
     <dimen name="bottom_sheet_image_h">35dp</dimen>
+    <dimen name="cardDialogCornerRadius">5dp</dimen>
 </resources>

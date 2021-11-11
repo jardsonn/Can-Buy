@@ -10,9 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Jardson Costa on 03/11/2021.
@@ -32,25 +31,23 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
     fun productQuantity(): LiveData<Int> =
         repository.productQuantity.asLiveData(Dispatchers.IO)
 
-    fun totalValue(list: List<ProductEntity>): Double{
+    fun getProductById(productId: Int?): LiveData<ProductEntity> =
+        repository.getProductById(productId!!).asLiveData(Dispatchers.IO)
+
+    fun totalValue(list: List<ProductEntity>): Double {
         var totalPrice = 0.0
-        for (product in list){
+        for (product in list) {
             totalPrice += product.price * product.quantity
         }
         return totalPrice
     }
 
-    fun addProduct(product: ProductEntity) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val success = repository.insertProduct(product)
-            _actionState.value = if (success) ActionState.Added else ActionState.Error
-        }
-    }
-
-    fun deleteProduct(productId: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val success = repository.deleteProduct(productId)
-            _actionState.value = if (success) ActionState.Deleted else ActionState.Error
+    fun deleteProduct(productId: Int?) {
+        CoroutineScope(Dispatchers.Main).launch {
+           withContext(Dispatchers.IO){
+               val success = repository.deleteProduct(productId!!)
+               _actionState.value = if (success) ActionState.Deleted else ActionState.Error
+           }
         }
     }
 
@@ -61,16 +58,54 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
         }
     }
 
+    fun addProduct(product: ProductEntity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val success = repository.insertProduct(product)
+            _actionState.value =
+                if (success) ActionState.Added else ActionState.Error
+        }
+    }
+
+    fun addProductInCart(productId: Int, isInCart: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val success = repository.insertProductInCart(productId, isInCart)
+            _actionState.value =
+                if (success) ActionState.Added else ActionState.Error
+        }
+    }
+
+    fun updateProduct(product: ProductEntity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val success = repository.updateProduct(
+                productId = product.id!!,
+                productName = product.name,
+                productPrice = product.price,
+                productQuantity = product.quantity,
+                unit = product.unit,
+                isInCart = product.isInCart,
+            )
+            _actionState.value = if (success) ActionState.Updated else ActionState.Error
+        }
+    }
+
     fun updateProduct(
         productId: Int,
         productName: String,
         productPrice: Double,
-        productQuantity: Int,
+        productQuantity: Double,
+        productUnit: String,
         isInCart: Boolean
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             val success =
-                repository.updateProduct(productId, productName, productPrice, productQuantity, isInCart)
+                repository.updateProduct(
+                    productId,
+                    productName,
+                    productPrice,
+                    productQuantity,
+                    productUnit,
+                    isInCart
+                )
             _actionState.value = if (success) ActionState.Updated else ActionState.Error
         }
     }

@@ -24,6 +24,9 @@ interface ProductDao {
     @Update
     suspend fun update(productEntity: ProductEntity)
 
+    @Query("UPDATE product_table SET is_in_cart = :isInCart WHERE id = :productId")
+    suspend fun updeteCart(productId: Int, isInCart: Boolean)
+
     @Query("SELECT * FROM product_table WHERE id = :id")
     fun getProductById(id: Int): Flow<ProductEntity>
 

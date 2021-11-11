@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/cl_item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground">
@@ -31,24 +31,16 @@
         tools:text="Feijão" />
 
     <TextView
-        android:id="@+id/tv_item_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color_light"
-        app:layout_constraintStart_toEndOf="@id/cb_item_cart"
-        app:layout_constraintTop_toBottomOf="@id/tv_item_name"
-        tools:text="Qtd: 5" />
-
-    <TextView
-        android:id="@+id/tv_item_value"
+        android:id="@+id/tv_item_quantity_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/text_color_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/cb_item_cart"
-        app:layout_constraintTop_toBottomOf="@id/tv_item_quantity"
-        tools:text="Valor: R$ 15" />
+        app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+        tools:text="5 kg = R$15" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/ib_item_remove"
