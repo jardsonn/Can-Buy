@@ -30,7 +30,7 @@ interface ProductDao {
     @Query("SELECT * FROM product_table WHERE id = :id")
     fun getProductById(id: Int): Flow<ProductEntity>
 
-    @Query("SELECT * FROM product_table")
+    @Query("SELECT * FROM product_table ORDER BY id DESC")
     fun getAllProducts(): Flow<List<ProductEntity>>
 
     @Query("DELETE FROM product_table")

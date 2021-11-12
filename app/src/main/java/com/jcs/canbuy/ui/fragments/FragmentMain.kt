@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withStarted
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jcs.canbuy.CanBuyApplication
 import com.jcs.canbuy.R
 import com.jcs.canbuy.data.database.entities.ProductEntity
 import com.jcs.canbuy.databinding.FragmentMainBinding
@@ -15,19 +17,20 @@ import com.jcs.canbuy.ui.adapter.MainAdapter
 import com.jcs.canbuy.ui.dialog.InsertUpdateDialog
 import com.jcs.canbuy.ui.viewmodes.MainViewModel
 import com.jcs.canbuy.utils.CurrencyFormat
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 
 /**
  * Created by Jardson Costa on 02/11/2021.
  */
 
-
+@AndroidEntryPoint
 class FragmentMain : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModel.MainViewModelFactory((activity?.application as CanBuyApplication).repoProduct)
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,10 +50,9 @@ class FragmentMain : Fragment() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        var a: MutableList<ProductEntity>
+
         viewModel.allProducts().observe(viewLifecycleOwner, {
             adapter.submitList(it)
-            a = adapter.currentList
             tvBottomSheetTotal.text = getString(R.string.total, it.size.toString())
             tvBottomSheetValueTotal.text = CurrencyFormat.getValueFormated(viewModel.totalValue(it))
         })
@@ -62,10 +64,10 @@ class FragmentMain : Fragment() {
         })
 
         fab.setOnClickListener { _ ->
-          InsertUpdateDialog.getInstance(null).apply {
-              setOnClickListener { viewModel.addProduct(it) }
-              show(this@FragmentMain.parentFragmentManager, "dialog_insert")
-          }
+            InsertUpdateDialog.getInstance(null).apply {
+                setOnClickListener { viewModel.addProduct(it) }
+                show(this@FragmentMain.parentFragmentManager, "dialog_insert")
+            }
         }
 
         adapter.setOnDeleteClickListener { product ->
@@ -78,13 +80,13 @@ class FragmentMain : Fragment() {
 
         adapter.setOnItemClickListener { product ->
             InsertUpdateDialog.getInstance(product).apply {
-               setOnClickListener { viewModel.updateProduct(it) }
+                setOnClickListener { viewModel.updateProduct(it) }
                 show(this@FragmentMain.parentFragmentManager, "dialog_update")
             }
         }
+
         return root
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

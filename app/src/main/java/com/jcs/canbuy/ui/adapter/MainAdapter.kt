@@ -21,7 +21,6 @@ class MainAdapter : ListAdapter<ProductEntity, MainAdapter.MainViewHolder>(MAIN_
     private var listenerCart: EventListClick.OnItemCartListener? = null
     private var listenerItem: EventListClick.OnItemClickListener? = null
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflate = LayoutInflater.from(parent.context)
         val binding = ItemPurchasesBinding.inflate(inflate)
@@ -104,7 +103,6 @@ class MainAdapter : ListAdapter<ProductEntity, MainAdapter.MainViewHolder>(MAIN_
             override fun onItemClick(product: ProductEntity) {
                 lisnter.invoke(product)
             }
-
         })
     }
 
