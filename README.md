@@ -12,6 +12,7 @@ Can Buy é um aplicativo de lista de compras que vai te ajudar a se organizar e 
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Usado para criar objetos de dados que notificam as visualizações quando o banco de dados subjacente é modificado.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Armazena dados relacionados à IU que não são destruídos em rotações de apps.
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - É uma biblioteca de mapeamento de objetos SQLite. 
+  - [View Binding](https://developer.android.com/topic/libraries/view-binding) - É um recurso que facilita a programação de códigos que interagem com visualizações.
 - [Material Design para Android](https://developer.android.com/guide/topics/ui/look-and-feel) - É um guia abrangente para design visual, de animação e interação entre plataformas e dispositivos.
 
 ## Arquitetura
