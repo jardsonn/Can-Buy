@@ -6,21 +6,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.jcs.canbuy.data.database.entities.ProductEntity
 import com.jcs.canbuy.repository.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * Created by Jardson Costa on 03/11/2021.
  */
 
-class MainViewModel(private val repository: ProductRepository) : ViewModel() {
-
-    private val _actionState = MutableStateFlow<ActionState>(ActionState.Added)
-    val actionState: StateFlow<ActionState> get() = _actionState
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: ProductRepository) : ViewModel() {
 
     fun allProducts(): LiveData<List<ProductEntity>> =
         repository.allProducts.asLiveData(Dispatchers.IO)
@@ -44,33 +44,27 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
 
     fun deleteProduct(productId: Int?) {
         CoroutineScope(Dispatchers.Main).launch {
-           withContext(Dispatchers.IO){
-               val success = repository.deleteProduct(productId!!)
-               _actionState.value = if (success) ActionState.Deleted else ActionState.Error
-           }
+            withContext(Dispatchers.IO) {
+                val success = repository.deleteProduct(productId!!)
+            }
         }
     }
 
     fun deleteAllProducts() {
         CoroutineScope(Dispatchers.IO).launch {
             val success = repository.deleteAllProducts()
-            _actionState.value = if (success) ActionState.Deleted else ActionState.Error
         }
     }
 
     fun addProduct(product: ProductEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             val success = repository.insertProduct(product)
-            _actionState.value =
-                if (success) ActionState.Added else ActionState.Error
         }
     }
 
     fun addProductInCart(productId: Int, isInCart: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             val success = repository.insertProductInCart(productId, isInCart)
-            _actionState.value =
-                if (success) ActionState.Added else ActionState.Error
         }
     }
 
@@ -84,7 +78,6 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
                 unit = product.unit,
                 isInCart = product.isInCart,
             )
-            _actionState.value = if (success) ActionState.Updated else ActionState.Error
         }
     }
 
@@ -106,22 +99,7 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
                     productUnit,
                     isInCart
                 )
-            _actionState.value = if (success) ActionState.Updated else ActionState.Error
         }
     }
 
-
-    sealed class ActionState {
-        object Added : ActionState()
-        object Deleted : ActionState()
-        object Updated : ActionState()
-        object Error : ActionState()
-    }
-
-    class MainViewModelFactory(private val repository: ProductRepository) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MainViewModel(repository) as T
-        }
-    }
 }

@@ -10,6 +10,7 @@ import com.jcs.canbuy.data.database.entities.ProductEntity
 import com.jcs.canbuy.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 /**
@@ -24,7 +25,7 @@ abstract class CanBuyDatabase : RoomDatabase() {
     companion object{
         private var INSTANCE: CanBuyDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): CanBuyDatabase {
+        fun getDatabase(context: Context): CanBuyDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room
                     .databaseBuilder(
@@ -33,7 +34,7 @@ abstract class CanBuyDatabase : RoomDatabase() {
                         Constants.DATABASE_NAME
                     )
                     .fallbackToDestructiveMigration()
-                    .addCallback(CanBuyDatabaseCallback(scope))
+                    .addCallback(CanBuyDatabaseCallback(CoroutineScope(SupervisorJob())))
                     .build()
                 INSTANCE = instance
                 instance

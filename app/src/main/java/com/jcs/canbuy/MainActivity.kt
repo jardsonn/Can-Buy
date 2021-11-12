@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.jcs.canbuy.databinding.ActivityMainBinding
 import com.jcs.canbuy.ui.fragments.FragmentMain
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

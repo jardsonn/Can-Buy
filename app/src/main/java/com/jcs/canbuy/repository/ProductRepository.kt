@@ -4,12 +4,13 @@ import com.jcs.canbuy.data.database.dao.ProductDao
 import com.jcs.canbuy.data.database.entities.ProductEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
 
 /**
  * Created by Jardson Costa on 03/11/2021.
  */
 
-class ProductRepository(private val dao: ProductDao) {
+class ProductRepository @Inject constructor(private val dao: ProductDao) {
 
     val allProducts: Flow<List<ProductEntity>> = dao.getAllProducts()
 
