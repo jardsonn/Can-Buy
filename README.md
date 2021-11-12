@@ -8,6 +8,7 @@ Can Buy é um aplicativo de lista de compras que vai te ajudar a se organizar e 
 - [Kotlin](https://kotlinlang.org/docs/android-overview.html) - Linguagem de programação oficial para desenvolvimento Android.
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html) - Para executar o código de forma assíncrona.
 - [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) -  É  stream de dados que pode emitir vários valores sequencialmente.
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=pt-br) - É uma biblioteca de injeção de dependência para Android que reduz a injeção manual de código de texto clichê no projeto.
 - [Componentes da arquitetura do Android](https://developer.android.com/topic/libraries/architecture) - É um conjunto de bibliotecas que ajuda a projetar apps robustos.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Usado para criar objetos de dados que notificam as visualizações quando o banco de dados subjacente é modificado.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Armazena dados relacionados à IU que não são destruídos em rotações de apps.
