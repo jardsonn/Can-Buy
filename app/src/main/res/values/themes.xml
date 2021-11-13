@@ -37,4 +37,17 @@
         <item name="android:windowBackground">@drawable/splash_screen_bg</item>
         <item name="android:statusBarColor">@color/ic_launcher_background</item>
     </style>
+
+    <style name="TextItem" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_sub_item_color</item>
+    </style>
+
+    <style name="TextItem.Title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_item_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ImageButtonItemStyle" parent="Widget.AppCompat.ImageButton">
+        <item name="tint">@color/butto_item_color</item>
+    </style>
 </resources>

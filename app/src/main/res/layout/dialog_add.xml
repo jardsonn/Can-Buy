@@ -11,6 +11,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        style="@style/Widget.MaterialComponents.CardView"
         app:cardCornerRadius="@dimen/cardDialogCornerRadius"
         app:contentPadding="16dp">
 

@@ -1,16 +1,46 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CanBuy" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.CanBuy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSurface">@color/surface_color</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorOnSecondary">@color/secondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar_dark_color</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/secondary</item>
+        <!-- ActionMode -->
+        <item name="actionModeBackground">@color/primary</item>
+        <!-- Window -->
+        <item name="android:windowBackground">@color/secondary</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- Font -->
+        <item name="fontFamily">@font/nunito</item>
     </style>
+
+    <style name="Theme.CanBuy.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_dark_bg</item>
+        <item name="android:statusBarColor">@color/secondary</item>
+    </style>
+
+    <style name="TextItem" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_sub_item_dark_color</item>
+    </style>
+
+    <style name="TextItem.Title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_item_dark_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ImageButtonItemStyle" parent="Widget.AppCompat.ImageButton">
+        <item name="tint">@color/butto_item_dark_color</item>
+    </style>
+
 </resources>
